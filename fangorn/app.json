@@ -1,0 +1,59 @@
+{
+  "app": "piedmont-demo",
+  "name": "Piedmont City Council Minutes",
+  "description": "Every City Council meeting of Piedmont, Alabama since 2024, from the official minutes: each meeting whole, and each piece of business in it (resolutions, ordinances, bills, contracts, purchases, appointments, reports), searchable by meaning. Every record links to the page of the official PDF it comes from and carries that PDF's sha256.",
+  "tags": ["civic", "local-government", "meetings", "alabama"],
+  "site": {
+    "project": "piedmont-demo",
+    "account": "2e0a41ed3fec719d427dfae6512efddf"
+  },
+  "fangorn": "node ${PWD}/node_modules/@fangorn-network/sdk/lib/cli/cli.js",
+  "types": {
+    "piedmont.item.v1": {
+      "description": "One paragraph of business from the official minutes of a Piedmont, Alabama City Council meeting: a motion, vote, resolution, ordinance, payment of bills, contract, purchase, appointment, report or comment, as the minutes record it, with the PDF page it is on.",
+      "role_map": {
+        "identity": "item_id",
+        "title": "heading",
+        "subtitle": "meeting",
+        "temporal": "date",
+        "media": "url",
+        "tags": ["kind", "year", "meeting_type"],
+        "text": ["text"]
+      },
+      "presentation": {
+        "externalUrl": { "piedmont.item.v1": "{url}" },
+        "types": { "piedmont.item.v1": { "icon": "🏛️", "singular": "Item of business", "plural": "Items of business" } },
+        "facets": ["kind", "year"]
+      }
+    },
+    "piedmont.meeting.v1": {
+      "description": "One Piedmont, Alabama City Council meeting (regular, special called or organizational): the full text of its official minutes, the PDF, and the PDF's sha256.",
+      "role_map": {
+        "identity": "meeting_id",
+        "title": "title",
+        "subtitle": "meeting_type",
+        "temporal": "date",
+        "media": "url",
+        "tags": ["year", "meeting_type"],
+        "text": ["text"]
+      },
+      "presentation": {
+        "externalUrl": { "piedmont.meeting.v1": "{url}" },
+        "types": { "piedmont.meeting.v1": { "icon": "📜", "singular": "Meeting", "plural": "Meetings" } },
+        "facets": ["year"]
+      }
+    }
+  },
+  "relations": [],
+  "sources": [
+    {
+      "namespace": "piedmont-minutes",
+      "cwd": ".",
+      "command": [
+        "${PYTHON:-.venv/bin/python}", "-m", "sources.minutes",
+        "--output-dir", ".ship/stage/piedmont-minutes",
+        "--cache-dir", ".ship/cache/piedmont-minutes"
+      ]
+    }
+  ]
+}

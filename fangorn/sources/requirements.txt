@@ -1,0 +1,3 @@
+# The minutes source: quickbeam's harness (staging + publish) and PDF text with word spacing.
+quickbeam @ git+https://github.com/fangorn-network/embeddings@tony/dev
+pdfminer.six==20250506

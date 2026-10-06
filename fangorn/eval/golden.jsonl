@@ -1,0 +1,12 @@
+{"id": "knuckle-boom", "q": "knuckle boom truck", "expect": {"match": {"heading|text": "knuckle ?boom"}}, "min": 1, "goal": "residents"}
+{"id": "civic-center", "q": "Civic Center renovations", "expect": {"match": {"heading|text": "civic ?center"}}, "min": 1, "goal": "residents"}
+{"id": "drainage", "q": "flooding and drainage problems on a street", "expect": {"match": {"heading|text": "drain|pipe|ditch|flood|culvert"}}, "min": 0.6, "goal": "residents"}
+{"id": "zoning-board", "q": "who was put on the zoning board", "expect": {"match": {"heading|text": "zoning"}}, "min": 0.2, "goal": "residents"}
+{"id": "block-grant", "q": "community development block grant", "expect": {"match": {"heading|text": "block ?grant|CDBG"}}, "min": 0.2, "goal": "residents"}
+{"id": "garbage", "q": "new garbage truck", "expect": {"match": {"heading|text": "garbage"}}, "min": 0.6, "goal": "residents"}
+{"id": "bills-paid", "q": "how much did the city pay in bills", "expect": {"where": {"kind": "bills"}}, "min": 1, "goal": "researchers"}
+{"id": "resolutions", "kind": "count", "where": {"kind": "resolution"}, "expect": {"match": {"text": "resolution"}}, "min": 50, "goal": "researchers"}
+{"id": "ordinances", "kind": "count", "where": {"kind": "ordinance"}, "expect": {"match": {"text": "ordinance"}}, "min": 15, "goal": "researchers"}
+{"id": "years", "kind": "coverage", "field": "year", "values": ["2024", "2025", "2026"], "min": 1, "goal": "researchers"}
+{"id": "no-fingerprint", "kind": "records", "expect": {"not": {"match": {"pdf_sha256": "^[0-9a-f]{64}$"}}}, "max_pct": 0, "hard": true}
+{"id": "letterhead", "kind": "records", "expect": {"match": {"heading": "^(CITY COUNCIL|CITY OF PIEDMONT|_+.*)$"}}, "max_pct": 0, "hard": true}
